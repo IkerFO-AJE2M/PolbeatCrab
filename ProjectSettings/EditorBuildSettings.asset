@@ -9,12 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Menu_TestRoomAlba.unity
+    path: Assets/Scenes/TestAlba/Menu_TestRoomAlba.unity
     guid: 40f431fefa55ae74f8abc2e528637b35
   - enabled: 1
-    path: Assets/Scenes/Pantalla de Carga a Nivel_TestroomAlba.unity
+    path: Assets/Scenes/TestAlba/Pantalla de Carga a Nivel_TestroomAlba.unity
     guid: c672e936dc0ed9e49a3965369c81321b
   - enabled: 1
-    path: Assets/Scenes/Nivel_TestroomAlba.unity
+    path: Assets/Scenes/TestAlba/Nivel_TestroomAlba.unity
     guid: dfb9ab45b68e729468b89f2fc37f7484
   m_configObjects: {}
