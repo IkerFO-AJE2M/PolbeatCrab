@@ -159,6 +159,7 @@ MonoBehaviour:
   verticalInput: 0
   xSpeed: 5
   ySpeed: 3
+  spriteRenderer: {fileID: 238455924}
 --- !u!61 &238455923
 BoxCollider2D:
   m_ObjectHideFlags: 0

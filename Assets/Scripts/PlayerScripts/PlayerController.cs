@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float xSpeed;
     public float ySpeed;
     public SpriteRenderer spriteRenderer;
+    public Animator animator;
 
     // Update is called once per frame
     void Update()
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
         #region MOVEMENT
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) //Detecta cuando pulsas 
         {
+            animator.VelodadAnimacionX
+
             transform.Translate(Vector2.right * Time.deltaTime * xSpeed);
 
             spriteRenderer.flipX = true; //Flipea el sprite

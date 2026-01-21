@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 23a000cf8fe2b2e4890639ee0e3e9e42
+guid: add245a978bdd3941a2444a13d772d4d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Spritesheet_CrabRun_0
+      name: Spritesheet_CrabWalk_0
       rect:
         serializedVersion: 2
         x: 0
@@ -131,41 +131,41 @@ TextureImporter:
         width: 384
         height: 384
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e92091452be1b6b49838f14cac4092d1
-      internalID: 1835733891
+      spriteID: 6dd99696e6ba5404390e4382775f8078
+      internalID: 1235756528
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spritesheet_CrabRun_1
+      name: Spritesheet_CrabWalk_1
       rect:
         serializedVersion: 2
         x: 384
-        y: 382
+        y: 384
         width: 384
         height: 384
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b643aa2527a0e754a8756570a097f4a0
-      internalID: -860333859
+      spriteID: 54e89419170d42e409c2ded3f7263682
+      internalID: -1489019425
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spritesheet_CrabRun_2
+      name: Spritesheet_CrabWalk_2
       rect:
         serializedVersion: 2
         x: 0
@@ -173,20 +173,20 @@ TextureImporter:
         width: 384
         height: 384
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc8f00b2ea04d404fabe41a270f82086
-      internalID: -892136413
+      spriteID: c73d06d15af3e8941bcee02d00009500
+      internalID: 38025876
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spritesheet_CrabRun_3
+      name: Spritesheet_CrabWalk_3
       rect:
         serializedVersion: 2
         x: 384
@@ -194,14 +194,14 @@ TextureImporter:
         width: 384
         height: 384
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fdf2c2ca2f6dfb849aaa830980b6ded8
-      internalID: -937585476
+      spriteID: e238156e760aac34eb8ff3a4ce761969
+      internalID: -1418220789
       vertices: []
       indices: 
       edges: []
@@ -217,10 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Spritesheet_CrabRun_0: 1835733891
-      Spritesheet_CrabRun_1: -860333859
-      Spritesheet_CrabRun_2: -892136413
-      Spritesheet_CrabRun_3: -937585476
+      Spritesheet_CrabWalk_0: 1235756528
+      Spritesheet_CrabWalk_1: -1489019425
+      Spritesheet_CrabWalk_2: 38025876
+      Spritesheet_CrabWalk_3: -1418220789
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
