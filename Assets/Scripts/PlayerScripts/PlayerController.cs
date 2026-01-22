@@ -13,12 +13,15 @@ public class PlayerController : MonoBehaviour
     public float ySpeed;
     public float speedMultiplierX;
     public float speedMultiplierY;
+    // Varialbes Bool
+    private bool JPress;
+    private bool IsAtacking;
     //Variables de Componente
     public SpriteRenderer spriteRenderer;
     public Animator animator;
     //Variables Compuestas
     private Vector2 movement;
-    
+
     void Update()
     {
 
@@ -41,7 +44,7 @@ public class PlayerController : MonoBehaviour
             ySpeed = baseSpeedY;
         }
 
-
+        Pinch();
 
         #endregion
 
@@ -54,18 +57,25 @@ public class PlayerController : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical"); //Detecta cuando pulsas las flechas Arriba / Abajo
 
         transform.Translate(Vector2.up * Time.deltaTime * xSpeed * verticalInput);
+
+
         #endregion
 
+        animator.SetBool("JPress", JPress);
         animator.SetBool("IdleCrab", movement == Vector2.zero);
         animator.SetFloat("VelocidadCrabX", xSpeed);
-        /*
-        horizontalInput = GetKeyDown(KeyCode.RightArrow); //Detecta cuando pulsas las flechas Izquierda / Derecha
 
-        transform.Translate(Vector2.right * Time.deltaTime * xSpeed* horizontalInput);
+        /*horizontalInput = Input.GetAxisRaw("Horizontal"); //Detecta cuando pulsas las flechas Izquierda / Derecha
 
-        verticalInput = Input.GetAxis("Vertical"); //Detecta cuando pulsas las flechas Arriba / Abajo
+         transform.Translate(Vector2.right * Time.deltaTime * xSpeed * horizontalInput);
 
-        transform.Translate(Vector2.up * Time.deltaTime * xSpeed * verticalInput);
+         verticalInput = Input.GetAxisRaw("Vertical"); //Detecta cuando pulsas las flechas Arriba / Abajo
+
+         transform.Translate(Vector2.up * Time.deltaTime * xSpeed * verticalInput);
+         #endregion
+
+         animator.SetBool("IdleCrab", movement == Vector2.zero);
+         animator.SetFloat("VelocidadCrabX", xSpeed);
         */
     }
 
@@ -84,8 +94,22 @@ public class PlayerController : MonoBehaviour
         {
             spriteRenderer.flipX = false;
         }
-    } //Filpea el sprite en el eje X según el calor del horizontalInput
+    }
     
+    private void Pinch()
+    {
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            JPress = true;
+        }
+        else
+        {
+            JPress = false;
+        }
+    }
+
+    //Filpea el sprite en el eje X según el calor del horizontalInput
+
     /*
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) //Detecta cuando pulsas 
         {
@@ -117,5 +141,20 @@ public class PlayerController : MonoBehaviour
             transform.Translate(Vector2.down * Time.deltaTime * ySpeed);
         }
        */
+
+    /*
+ protected override void FixedUpdate()
+ {
+     base.FixedUpdate();
+
+     foreach (Collider2D groundCollider in groundColliders)
+     {
+         if (groundCollider != null)
+         {
+             Physics2D.IgnoreCollision(groundCollider, player.collider, player.orthogonalRigidbody.localPosition.z >= groundCollider.transform.position.z);
+         }
+     }
+ }
+ */
 }
 
