@@ -7,9 +7,12 @@ public class PlayerController : MonoBehaviour
     // Variables Float
     public float horizontalInput;
     public float verticalInput;
+    public float baseSpeedX;
+    public float baseSpeedY;
     public float xSpeed;
     public float ySpeed;
-    public float speedMultiplier;
+    public float speedMultiplierX;
+    public float speedMultiplierY;
     //Variables de Componente
     public SpriteRenderer spriteRenderer;
     public Animator animator;
@@ -18,11 +21,30 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
-        
+
         //Cambiamos elvalor del Movement
         movement = new Vector2(horizontalInput, verticalInput);
+
         //Corregimos la orientación del sprite
         SpriteFlip();
+
+        #region MOVEMENT.MODIFIERS
+        //Nos aseguramos de que este pulsando o no el botón de correr
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            xSpeed = baseSpeedX * speedMultiplierX;
+            ySpeed = baseSpeedY * speedMultiplierY;
+        }
+        else
+        {
+            xSpeed = baseSpeedX;
+            ySpeed = baseSpeedY;
+        }
+
+
+
+        #endregion
+
         //Aplciamos el movimiento
         #region MOVEMENT
         horizontalInput = Input.GetAxisRaw("Horizontal"); //Detecta cuando pulsas las flechas Izquierda / Derecha
@@ -35,6 +57,7 @@ public class PlayerController : MonoBehaviour
         #endregion
 
         animator.SetBool("IdleCrab", movement == Vector2.zero);
+        animator.SetFloat("VelocidadCrabX", xSpeed);
         /*
         horizontalInput = GetKeyDown(KeyCode.RightArrow); //Detecta cuando pulsas las flechas Izquierda / Derecha
 
