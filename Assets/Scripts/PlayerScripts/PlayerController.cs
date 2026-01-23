@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private bool jPress;
     private bool jHold;
     private bool isAttacking;
+    private bool isCharge;
     //Variables de Componente
     public SpriteRenderer spriteRenderer;
     public Animator animator;
@@ -70,6 +71,7 @@ public class PlayerController : MonoBehaviour
         #endregion
 
         animator.SetBool("Attack", isAttacking);
+        animator.SetBool("Charge", isCharge);
         animator.SetBool("JPress", jPress);
         animator.SetBool("JHold", jHold);
         animator.SetBool("IdleCrab", movement == Vector2.zero);
@@ -110,21 +112,25 @@ public class PlayerController : MonoBehaviour
     {
         umbralTiempo = 1f;
         TiempoCargado = Time.deltaTime;
+        isCharge = true;
 
-
-        if (TiempoCargado > umbralTiempo)
+        if (Input.GetKeyDown(KeyCode.J) && isAttacking == false)
         {
-            Contusion();
+            if (TiempoCargado > umbralTiempo)
+            {
+                Contusion();
+            }
+            else
+            {
+                 Pinch();
+            }
         }
-        else
-        {
-            Pinch();
-        }
+            
     }
 
     private void Contusion()
     {
-        if (Input.GetKeyDown(KeyCode.J) && isAttacking == false)
+        if (Input.GetKeyDown(KeyCode.J))
         {
             jHold = true;
         }
@@ -135,7 +141,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Pinch()
     {
-        if (Input.GetKey(KeyCode.J) && isAttacking == false)
+        if (Input.GetKey(KeyCode.J))
         {
             jPress = true;
             new WaitForSeconds(0.2f);
