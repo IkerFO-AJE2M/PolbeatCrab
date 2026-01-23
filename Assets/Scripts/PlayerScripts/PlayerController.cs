@@ -13,9 +13,12 @@ public class PlayerController : MonoBehaviour
     public float ySpeed;
     public float speedMultiplierX;
     public float speedMultiplierY;
+    public float umbralTiempo;
+    private float TiempoCargado;
     // Varialbes Bool
-    private bool JPress;
-    private bool IsAtacking;
+    private bool jPress;
+    private bool jHold;
+    private bool isAttacking;
     //Variables de Componente
     public SpriteRenderer spriteRenderer;
     public Animator animator;
@@ -31,6 +34,8 @@ public class PlayerController : MonoBehaviour
         //Corregimos la orientación del sprite
         SpriteFlip();
 
+        //Miramos si está atacando
+        AnimationTagCheck();
         #region MOVEMENT.MODIFIERS
         //Nos aseguramos de que este pulsando o no el botón de correr
         if (Input.GetKey(KeyCode.LeftShift))
@@ -43,25 +48,30 @@ public class PlayerController : MonoBehaviour
             xSpeed = baseSpeedX;
             ySpeed = baseSpeedY;
         }
+        JAttack();
 
-        Pinch();
+
 
         #endregion
 
-        //Aplciamos el movimiento
+        //Aplicamos el movimiento
         #region MOVEMENT
-        horizontalInput = Input.GetAxisRaw("Horizontal"); //Detecta cuando pulsas las flechas Izquierda / Derecha
+        if (isAttacking == false)
+        {
+            horizontalInput = Input.GetAxisRaw("Horizontal"); //Detecta cuando pulsas las flechas Izquierda / Derecha
 
-        transform.Translate(Vector2.right * Time.deltaTime * xSpeed * horizontalInput);
+            transform.Translate(Vector2.right * Time.deltaTime * xSpeed * horizontalInput);
 
-        verticalInput = Input.GetAxisRaw("Vertical"); //Detecta cuando pulsas las flechas Arriba / Abajo
+            verticalInput = Input.GetAxisRaw("Vertical"); //Detecta cuando pulsas las flechas Arriba / Abajo
 
-        transform.Translate(Vector2.up * Time.deltaTime * xSpeed * verticalInput);
-
+            transform.Translate(Vector2.up * Time.deltaTime * xSpeed * verticalInput);
+        }
 
         #endregion
 
-        animator.SetBool("JPress", JPress);
+        animator.SetBool("Attack", isAttacking);
+        animator.SetBool("JPress", jPress);
+        animator.SetBool("JHold", jHold);
         animator.SetBool("IdleCrab", movement == Vector2.zero);
         animator.SetFloat("VelocidadCrabX", xSpeed);
 
@@ -95,66 +105,67 @@ public class PlayerController : MonoBehaviour
             spriteRenderer.flipX = false;
         }
     }
-    
-    private void Pinch()
+
+    void JAttack()
     {
-        if (Input.GetKeyDown(KeyCode.J))
+        umbralTiempo = 1f;
+        TiempoCargado = Time.deltaTime;
+
+
+        if (TiempoCargado > umbralTiempo)
         {
-            JPress = true;
+            Contusion();
         }
         else
         {
-            JPress = false;
+            Pinch();
         }
     }
 
-    //Filpea el sprite en el eje X según el calor del horizontalInput
-
-    /*
-        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) //Detecta cuando pulsas 
+    private void Contusion()
+    {
+        if (Input.GetKeyDown(KeyCode.J) && isAttacking == false)
         {
-            xSpeed = 3;
-
-            HorizontalImputCheck();
-
-            transform.Translate(Vector2.right * Time.deltaTime * xSpeed);
-
-            spriteRenderer.flipX = true; //Flipea el sprite
+            jHold = true;
         }
-
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+        else
         {
-            HorizontalImputCheck();
-
-            transform.Translate(Vector2.left * Time.deltaTime * xSpeed);
-            
-            spriteRenderer.flipX = false;
+            jHold = false;
         }
-
-        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+    }
+    private void Pinch()
+    {
+        if (Input.GetKey(KeyCode.J) && isAttacking == false)
         {
-            transform.Translate(Vector2.up * Time.deltaTime * ySpeed);
+            jPress = true;
+            new WaitForSeconds(0.2f);
+            if(spriteRenderer.flipX == true)
+            {
+                transform.Translate(new Vector2(0.01f, 0));
+            }
+            if (spriteRenderer.flipX == false)
+            {
+                transform.Translate(new Vector2(-0.01f, 0));
+            }
         }
-
-        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
-        { 
-            transform.Translate(Vector2.down * Time.deltaTime * ySpeed);
+        else
+        {
+            jPress = false;
         }
-       */
+    }
 
-    /*
- protected override void FixedUpdate()
- {
-     base.FixedUpdate();
 
-     foreach (Collider2D groundCollider in groundColliders)
-     {
-         if (groundCollider != null)
-         {
-             Physics2D.IgnoreCollision(groundCollider, player.collider, player.orthogonalRigidbody.localPosition.z >= groundCollider.transform.position.z);
-         }
-     }
- }
- */
+
+    private void AnimationTagCheck()
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        {
+            isAttacking = true;
+        }
+        else
+        {
+            isAttacking = false;
+        }
+    }
 }
 
