@@ -23,9 +23,14 @@ public class PlayerController : MonoBehaviour
     //Variables de Componente
     public SpriteRenderer spriteRenderer;
     public Animator animator;
+    public Rigidbody2D _rbPlayer;
     //Variables Compuestas
     private Vector2 movement;
 
+    void Start()
+    {
+        _rbPlayer = GetComponent<Rigidbody2D>();
+    }
     void Update()
     {
 
@@ -49,8 +54,9 @@ public class PlayerController : MonoBehaviour
             xSpeed = baseSpeedX;
             ySpeed = baseSpeedY;
         }
-        JAttack();
 
+        //JAttack();
+        Pinch();
 
 
         #endregion
@@ -107,24 +113,28 @@ public class PlayerController : MonoBehaviour
             spriteRenderer.flipX = false;
         }
     }
-
+    /*
     void JAttack()
     {
-        umbralTiempo = 1f;
-        TiempoCargado = Time.deltaTime;
-        isCharge = true;
-
-        if (Input.GetKeyDown(KeyCode.J) && isAttacking == false)
+        if(Input.GetKeyDown(KeyCode.J))
         {
-            if (TiempoCargado > umbralTiempo)
+            umbralTiempo = 1f;
+            TiempoCargado = Time.deltaTime;
+            isCharge = true;
+
+            if(isAttacking == true)
             {
-                Contusion();
-            }
-            else
-            {
-                 Pinch();
+                if (TiempoCargado > umbralTiempo && isCharge == true)
+                {
+                    Contusion();
+                }
+                else
+                {
+                    Pinch();
+                }
             }
         }
+        
             
     }
 
@@ -138,20 +148,22 @@ public class PlayerController : MonoBehaviour
         {
             jHold = false;
         }
-    }
+    }*/
     private void Pinch()
     {
-        if (Input.GetKey(KeyCode.J))
+        if (Input.GetKey(KeyCode.J) && isAttacking == false)
         {
             jPress = true;
-            new WaitForSeconds(0.2f);
+            
             if(spriteRenderer.flipX == true)
             {
-                transform.Translate(new Vector2(0.01f, 0));
+                //transform.Translate(new Vector2(40f,0) * Time.deltaTime * xSpeed * horizontalInput);
+                _rbPlayer.AddForce(Vector2.right * horizontalInput * baseSpeedX);
             }
             if (spriteRenderer.flipX == false)
             {
-                transform.Translate(new Vector2(-0.01f, 0));
+                //transform.Translate(new Vector2(40f, 0) * Time.deltaTime * xSpeed * horizontalInput);
+                _rbPlayer.AddForce(Vector2.right * horizontalInput * baseSpeedX);
             }
         }
         else
