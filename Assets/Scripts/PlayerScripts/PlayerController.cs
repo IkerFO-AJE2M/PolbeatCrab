@@ -15,17 +15,25 @@ public class PlayerController : MonoBehaviour
     public float speedMultiplierY;
     public float umbralTiempo;
     private float TiempoCargado;
+    public float jumpForce = 1000;
+    public float _rbSpeed;
+    public float posibleJumps;
+    public float currentJumps;
     // Varialbes Bool
     private bool jPress;
     private bool jHold;
     private bool isAttacking;
     private bool isCharge;
+    private bool isJumping;
+    private bool Grounded;
     //Variables de Componente
     public SpriteRenderer spriteRenderer;
     public Animator animator;
     public Rigidbody2D _rbPlayer;
+    [SerializeField] LayerMask Ground;
     //Variables Compuestas
     private Vector2 movement;
+    private RaycastHit2D groundHit;
 
     void Start()
     {
@@ -33,6 +41,15 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
+        if (groundHit == true)
+        {
+            Debug.Log("Esmegma");
+        }
+
+        //groundHit = Physics2D.Raycast(transform.position, Vector2.down, 1f, Ground);
+
+        //Actualizamos la velocidad del Rigidbody cada frame
+        _rbSpeed = _rbPlayer.velocity.magnitude;
 
         //Cambiamos elvalor del Movement
         movement = new Vector2(horizontalInput, verticalInput);
@@ -57,6 +74,7 @@ public class PlayerController : MonoBehaviour
 
         //JAttack();
         Pinch();
+        Jump();
 
 
         #endregion
@@ -76,12 +94,15 @@ public class PlayerController : MonoBehaviour
 
         #endregion
 
+        #region AnimatorBools
+        animator.SetBool("Jump", isJumping);
         animator.SetBool("Attack", isAttacking);
         animator.SetBool("Charge", isCharge);
         animator.SetBool("JPress", jPress);
         animator.SetBool("JHold", jHold);
         animator.SetBool("IdleCrab", movement == Vector2.zero);
         animator.SetFloat("VelocidadCrabX", xSpeed);
+        #endregion
 
         /*horizontalInput = Input.GetAxisRaw("Horizontal"); //Detecta cuando pulsas las flechas Izquierda / Derecha
 
@@ -153,25 +174,33 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.J) && isAttacking == false)
         {
+            _rbPlayer.AddForce(Vector2.right * horizontalInput * jumpForce, ForceMode2D.Impulse);
             jPress = true;
-            
-            if(spriteRenderer.flipX == true)
-            {
-                //transform.Translate(new Vector2(40f,0) * Time.deltaTime * xSpeed * horizontalInput);
-                _rbPlayer.AddForce(Vector2.right * horizontalInput * baseSpeedX);
-            }
-            if (spriteRenderer.flipX == false)
-            {
-                //transform.Translate(new Vector2(40f, 0) * Time.deltaTime * xSpeed * horizontalInput);
-                _rbPlayer.AddForce(Vector2.right * horizontalInput * baseSpeedX);
-            }
+
         }
-        else
+        else if (isAttacking)
         {
             jPress = false;
+            _rbPlayer.velocity = new Vector2(0, 0);
         }
     }
 
+    private void Jump()
+    {
+        if (Input.GetKey(KeyCode.Space) && currentJumps < posibleJumps)
+        {
+                _rbSpeed = 0;
+                _rbPlayer.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                isJumping = true;
+                _rbPlayer.gravityScale = 2f;
+                currentJumps += 1;
+        }
+        else if (_rbSpeed == 0)
+        {
+            _rbPlayer.gravityScale = 0f;
+            isJumping = false;
+        }
+    }
 
 
     private void AnimationTagCheck()
