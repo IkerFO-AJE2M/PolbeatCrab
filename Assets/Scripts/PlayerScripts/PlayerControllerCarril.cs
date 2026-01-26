@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerControllerCarril : MonoBehaviour
 {
     // Variables Float
     public float horizontalInput;
-    public float verticalInput;
     public float baseSpeedX;
-    public float baseSpeedY;
     public float xSpeed;
     public float ySpeed;
     public float speedMultiplierX;
-    public float speedMultiplierY;
     public float umbralTiempo;
     private float TiempoCargado;
     public float jumpForce = 1000;
@@ -25,7 +22,7 @@ public class PlayerController : MonoBehaviour
     private bool isAttacking;
     private bool isCharge;
     private bool isJumping;
-    private bool Grounded;
+    private bool isGrounded;
     //Variables de Componente
     public SpriteRenderer spriteRenderer;
     public Animator animator;
@@ -40,13 +37,13 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        //groundHit = Physics2D.Raycast(transform.position, Vector2.down, 1f, Ground);
+        
 
         //Actualizamos la velocidad del Rigidbody cada frame
         _rbSpeed = _rbPlayer.velocity.magnitude;
 
         //Cambiamos elvalor del Movement
-        movement = new Vector2(horizontalInput, verticalInput);
+        movement = new Vector2(horizontalInput, 0f);
 
         //Corregimos la orientación del sprite
         SpriteFlip();
@@ -59,12 +56,10 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             xSpeed = baseSpeedX * speedMultiplierX;
-            ySpeed = baseSpeedY * speedMultiplierY;
         }
         else
         {
             xSpeed = baseSpeedX;
-            ySpeed = baseSpeedY;
         }
 
         //JAttack();
@@ -91,6 +86,7 @@ public class PlayerController : MonoBehaviour
         #endregion
 
         #region AnimatorBools
+        animator.SetBool("IsGrounded", isGrounded);
         animator.SetBool("Jump", isJumping);
         animator.SetBool("Attack", isAttacking);
         animator.SetBool("Charge", isCharge);
@@ -98,6 +94,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("JHold", jHold);
         animator.SetBool("IdleCrab", movement == Vector2.zero);
         animator.SetFloat("VelocidadCrabX", xSpeed);
+        animator.SetFloat("VelocidadCrabY", ySpeed);
         #endregion
 
         /*horizontalInput = Input.GetAxisRaw("Horizontal"); //Detecta cuando pulsas las flechas Izquierda / Derecha
@@ -183,7 +180,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetKey(KeyCode.Space) && currentJumps < posibleJumps)
+        if (Input.GetKey(KeyCode.Space))
         {
                 _rbSpeed = 0;
                 _rbPlayer.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
