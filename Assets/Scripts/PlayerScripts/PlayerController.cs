@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     public Rigidbody2D _rbPlayer;
     [SerializeField] LayerMask Ground;
+    [SerializeField] Collider2D _playerCollider;
     //Variables Compuestas
     private Vector2 movement;
 
@@ -170,14 +172,14 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.J) && isAttacking == false)
         {
-            _rbPlayer.AddForce(Vector2.right * horizontalInput * jumpForce, ForceMode2D.Impulse);
+
             jPress = true;
 
         }
         else if (isAttacking)
         {
             jPress = false;
-            _rbPlayer.velocity = new Vector2(0, 0);
+
         }
     }
 
@@ -185,7 +187,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space) && currentJumps < posibleJumps)
         {
-                _rbSpeed = 0;
+               //_rbSpeed = 0;
                 _rbPlayer.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                 isJumping = true;
                 _rbPlayer.gravityScale = 2f;
@@ -193,11 +195,17 @@ public class PlayerController : MonoBehaviour
         }
         else if (_rbSpeed == 0)
         {
-            _rbPlayer.gravityScale = 0f;
+
             isJumping = false;
+ 
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        currentJumps = 0;
+        _rbPlayer.gravityScale = 0f;
+    }
 
     private void AnimationTagCheck()
     {
