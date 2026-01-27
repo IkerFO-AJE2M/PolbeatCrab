@@ -18,11 +18,13 @@ public class PlayerControllerCarril : MonoBehaviour
     public float currentJumps;
     // Varialbes Bool
     private bool jPress;
-    private bool jHold;
+    private bool jAirPress;
+    private bool kPress;
     private bool isAttacking;
     private bool isCharge;
     private bool isJumping;
     private bool isGrounded;
+    private bool kAirPress;
     //Variables de Componente
     public SpriteRenderer spriteRenderer;
     public Animator animator;
@@ -65,7 +67,9 @@ public class PlayerControllerCarril : MonoBehaviour
         //JAttack();
         Pinch();
         Jump();
-
+        Contusion();
+        Twirl();
+        Drill();
 
         #endregion
 
@@ -86,12 +90,14 @@ public class PlayerControllerCarril : MonoBehaviour
         #endregion
 
         #region AnimatorBools
+        animator.SetBool("KAirPress", kAirPress);
         animator.SetBool("IsGrounded", isGrounded);
         animator.SetBool("Jump", isJumping);
         animator.SetBool("Attack", isAttacking);
         animator.SetBool("Charge", isCharge);
         animator.SetBool("JPress", jPress);
-        animator.SetBool("JHold", jHold);
+        animator.SetBool("JAirPress", jAirPress);
+        animator.SetBool("KPress", kPress);
         animator.SetBool("IdleCrab", movement == Vector2.zero);
         animator.SetFloat("VelocidadCrabX", xSpeed);
         animator.SetFloat("VelocidadCrabY", ySpeed);
@@ -127,45 +133,23 @@ public class PlayerControllerCarril : MonoBehaviour
             spriteRenderer.flipX = false;
         }
     }
-    /*
-    void JAttack()
-    {
-        if(Input.GetKeyDown(KeyCode.J))
-        {
-            umbralTiempo = 1f;
-            TiempoCargado = Time.deltaTime;
-            isCharge = true;
-
-            if(isAttacking == true)
-            {
-                if (TiempoCargado > umbralTiempo && isCharge == true)
-                {
-                    Contusion();
-                }
-                else
-                {
-                    Pinch();
-                }
-            }
-        }
-        
-            
-    }
 
     private void Contusion()
     {
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKey(KeyCode.K) && isAttacking == false && isGrounded == true)
         {
-            jHold = true;
+            kPress = true;
+            Debug.Log("Nelooser");
         }
-        else
+        else if (isAttacking)
         {
-            jHold = false;
+
         }
-    }*/
+    }
+
     private void Pinch()
     {
-        if (Input.GetKey(KeyCode.J) && isAttacking == false)
+        if (Input.GetKey(KeyCode.J) && isGrounded == true && isAttacking == false)
         {
             _rbPlayer.AddForce(Vector2.right * horizontalInput * jumpForce, ForceMode2D.Impulse);
             jPress = true;
@@ -175,6 +159,36 @@ public class PlayerControllerCarril : MonoBehaviour
         {
             jPress = false;
             _rbPlayer.velocity = new Vector2(0, 0);
+        }
+    }
+
+    private void Twirl()
+    {
+        if (Input.GetKey(KeyCode.J) && isGrounded == false && isAttacking == false)
+        {
+
+            jAirPress = true;
+
+        }
+        else if (isAttacking)
+        {
+            jAirPress = false;
+
+        }
+    }
+
+    private void Drill()
+    {
+        if (Input.GetKey(KeyCode.K) && isGrounded == false && isAttacking == false)
+        {
+
+            kAirPress = true;
+
+        }
+        else if (isAttacking)
+        {
+            kAirPress = false;
+
         }
     }
 

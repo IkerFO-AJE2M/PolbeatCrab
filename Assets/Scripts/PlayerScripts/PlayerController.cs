@@ -22,11 +22,14 @@ public class PlayerController : MonoBehaviour
     public float currentJumps;
     // Varialbes Bool
     private bool jPress;
+    private bool jAirPress;
+    private bool kPress;
     private bool jHold;
     private bool isAttacking;
     private bool isCharge;
     private bool isJumping;
     private bool Grounded;
+
     //Variables de Componente
     public SpriteRenderer spriteRenderer;
     public Animator animator;
@@ -35,6 +38,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Collider2D _playerCollider;
     //Variables Compuestas
     private Vector2 movement;
+
 
     void Start()
     {
@@ -72,7 +76,7 @@ public class PlayerController : MonoBehaviour
         //JAttack();
         Pinch();
         Jump();
-
+        Contusion();
 
         #endregion
 
@@ -97,7 +101,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("Attack", isAttacking);
         animator.SetBool("Charge", isCharge);
         animator.SetBool("JPress", jPress);
-        animator.SetBool("JHold", jHold);
+        animator.SetBool("KPress", kPress);
         animator.SetBool("IdleCrab", movement == Vector2.zero);
         animator.SetFloat("VelocidadCrabX", xSpeed);
         #endregion
@@ -132,42 +136,20 @@ public class PlayerController : MonoBehaviour
             spriteRenderer.flipX = false;
         }
     }
-    /*
-    void JAttack()
-    {
-        if(Input.GetKeyDown(KeyCode.J))
-        {
-            umbralTiempo = 1f;
-            TiempoCargado = Time.deltaTime;
-            isCharge = true;
-
-            if(isAttacking == true)
-            {
-                if (TiempoCargado > umbralTiempo && isCharge == true)
-                {
-                    Contusion();
-                }
-                else
-                {
-                    Pinch();
-                }
-            }
-        }
-        
-            
-    }
 
     private void Contusion()
     {
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKey(KeyCode.K) && isAttacking == false)
         {
-            jHold = true;
+            kPress = true;
+            Debug.Log("Nelooser");
         }
-        else
+        else if (isAttacking)
         {
-            jHold = false;
+            kPress = false;
         }
-    }*/
+    }
+
     private void Pinch()
     {
         if (Input.GetKey(KeyCode.J) && isAttacking == false)
@@ -179,6 +161,21 @@ public class PlayerController : MonoBehaviour
         else if (isAttacking)
         {
             jPress = false;
+
+        }
+    }
+
+    private void Twirl()
+    {
+        if (Input.GetKey(KeyCode.J) && Grounded == false && isAttacking == false)
+        {
+
+            jAirPress = true;
+
+        }
+        else if (isAttacking)
+        {
+            jAirPress = false;
 
         }
     }

@@ -399,10 +399,10 @@ GameObject:
   m_Component:
   - component: {fileID: 238455925}
   - component: {fileID: 238455924}
-  - component: {fileID: 238455922}
   - component: {fileID: 238455928}
   - component: {fileID: 238455926}
   - component: {fileID: 238455927}
+  - component: {fileID: 238455929}
   m_Layer: 6
   m_Name: Player
   m_TagString: PlayerCape
@@ -410,38 +410,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &238455922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 238455921}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f3cb22a0df037843abfb56e5cadb83e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  horizontalInput: 0
-  verticalInput: 0
-  baseSpeedX: 5
-  baseSpeedY: 3
-  xSpeed: 1
-  ySpeed: 1
-  speedMultiplierX: 1.5
-  speedMultiplierY: 1.2
-  umbralTiempo: 0
-  jumpForce: 10
-  _rbSpeed: 0
-  posibleJumps: 1
-  currentJumps: 0
-  spriteRenderer: {fileID: 238455924}
-  animator: {fileID: 238455927}
-  _rbPlayer: {fileID: 238455926}
-  Ground:
-    serializedVersion: 2
-    m_Bits: 0
-  _playerCollider: {fileID: 0}
 --- !u!212 &238455924
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -592,6 +560,34 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0053028464, y: -0.5939231}
   m_Size: {x: 1.3735873, y: 1.4266157}
   m_Direction: 0
+--- !u!114 &238455929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238455921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89962e3e221a3ae438849f0e36e99c4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  horizontalInput: 0
+  baseSpeedX: 5
+  xSpeed: 3
+  ySpeed: 0
+  speedMultiplierX: 1.5
+  umbralTiempo: 1.2
+  jumpForce: 8
+  _rbSpeed: 0
+  posibleJumps: 4
+  currentJumps: 0
+  spriteRenderer: {fileID: 238455924}
+  animator: {fileID: 238455927}
+  _rbPlayer: {fileID: 238455926}
+  Ground:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &532172130
 GameObject:
   m_ObjectHideFlags: 0
