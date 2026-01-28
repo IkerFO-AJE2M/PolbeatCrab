@@ -13,6 +13,7 @@ public class ShadowFollow : MonoBehaviour
     public float speedMultiplierX;
     public float speedMultiplierY;
     [SerializeField] Animator animator;
+    [SerializeField] Rigidbody2D _rbShadow;
 
     void Start()
     {
@@ -28,17 +29,21 @@ public class ShadowFollow : MonoBehaviour
 
             transform.Translate(Vector2.right * Time.deltaTime * xSpeed * horizontalInput);
         }
-        
+        else
+        {
+            _rbShadow.velocity = Vector2.zero;
+        }
+
         if (Input.GetKey(KeyCode.LeftShift))
-            {
-                xSpeed = baseSpeedX * speedMultiplierX;
-                ySpeed = baseSpeedY * speedMultiplierY;
-            }
-            else
-            {
-                xSpeed = baseSpeedX;
-                ySpeed = baseSpeedY;
-            }
+        {
+            xSpeed = baseSpeedX * speedMultiplierX;
+            ySpeed = baseSpeedY * speedMultiplierY;
+        }
+        else
+        {
+            xSpeed = baseSpeedX;
+            ySpeed = baseSpeedY;
+        }
 
 
             

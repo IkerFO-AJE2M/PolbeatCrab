@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerControllerCarril : MonoBehaviour
@@ -73,6 +74,7 @@ public class PlayerControllerCarril : MonoBehaviour
 
         #endregion
 
+
         //Aplicamos el movimiento
         #region MOVEMENT
         if (isAttacking == false)
@@ -89,6 +91,7 @@ public class PlayerControllerCarril : MonoBehaviour
 
         #endregion
 
+        //Relacionamos variables con el Animator
         #region AnimatorBools
         animator.SetBool("KAirPress", kAirPress);
         animator.SetBool("IsGrounded", isGrounded);
@@ -143,7 +146,7 @@ public class PlayerControllerCarril : MonoBehaviour
         }
         else if (isAttacking)
         {
-
+            kPress = false;
         }
     }
 
@@ -151,7 +154,6 @@ public class PlayerControllerCarril : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.J) && isGrounded == true && isAttacking == false)
         {
-            _rbPlayer.AddForce(Vector2.right * horizontalInput * jumpForce, ForceMode2D.Impulse);
             jPress = true;
 
         }
@@ -164,9 +166,9 @@ public class PlayerControllerCarril : MonoBehaviour
 
     private void Twirl()
     {
-        if (Input.GetKey(KeyCode.J) && isGrounded == false && isAttacking == false)
+        if (Input.GetKey(KeyCode.J) && isGrounded == false && isAttacking == false && Input.GetKey(KeyCode.S))
         {
-
+            
             jAirPress = true;
 
         }
@@ -194,17 +196,18 @@ public class PlayerControllerCarril : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && currentJumps < posibleJumps && isAttacking == false && isGrounded)
         {
-                _rbSpeed = 0;
-                _rbPlayer.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-                isJumping = true;
-                _rbPlayer.gravityScale = 2f;
-                currentJumps += 1;
+            _rbSpeed = 0;
+            _rbPlayer.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            isJumping = true;
+            _rbPlayer.gravityScale = 2f;
+            currentJumps += 1;
         }
         else if (_rbSpeed == 0)
         {
             _rbPlayer.gravityScale = 0f;
+            currentJumps = 0;
             isJumping = false;
         }
     }
@@ -220,6 +223,15 @@ public class PlayerControllerCarril : MonoBehaviour
         {
             isAttacking = false;
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D Ground)
+    {
+        isGrounded = true;
+    }
+    private void OnCollisionExit2D(Collision2D Ground)
+    {
+        isGrounded = false;
     }
 }
 

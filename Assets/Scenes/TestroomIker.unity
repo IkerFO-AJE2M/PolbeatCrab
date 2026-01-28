@@ -151,8 +151,8 @@ Transform:
   m_GameObject: {fileID: 138244211}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.04, y: 6.236, z: 0}
-  m_LocalScale: {x: 10.180496, y: 3.5006442, z: 1}
+  m_LocalPosition: {x: 0.024, y: 6.236, z: 0}
+  m_LocalScale: {x: 13.05, y: 3.16, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -274,6 +274,7 @@ MonoBehaviour:
   speedMultiplierX: 1.5
   speedMultiplierY: 0
   animator: {fileID: 238455927}
+  _rbShadow: {fileID: 138244216}
 --- !u!50 &138244216
 Rigidbody2D:
   serializedVersion: 4
@@ -578,16 +579,16 @@ MonoBehaviour:
   ySpeed: 0
   speedMultiplierX: 1.5
   umbralTiempo: 1.2
-  jumpForce: 8
+  jumpForce: 10
   _rbSpeed: 0
-  posibleJumps: 4
+  posibleJumps: 1
   currentJumps: 0
   spriteRenderer: {fileID: 238455924}
   animator: {fileID: 238455927}
   _rbPlayer: {fileID: 238455926}
   Ground:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
 --- !u!1 &532172130
 GameObject:
   m_ObjectHideFlags: 0
