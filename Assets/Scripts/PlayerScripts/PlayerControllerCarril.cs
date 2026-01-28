@@ -22,10 +22,10 @@ public class PlayerControllerCarril : MonoBehaviour
     private bool jAirPress;
     private bool kPress;
     private bool isAttacking;
-    private bool isCharge;
     private bool isJumping;
     private bool isGrounded;
     private bool kAirPress;
+    private bool isDefending;
     //Variables de Componente
     public SpriteRenderer spriteRenderer;
     public Animator animator;
@@ -71,13 +71,14 @@ public class PlayerControllerCarril : MonoBehaviour
         Contusion();
         Twirl();
         Drill();
+        Defend();
 
         #endregion
 
 
         //Aplicamos el movimiento
         #region MOVEMENT
-        if (isAttacking == false)
+        if (isAttacking == false && isDefending == false)
         {
             horizontalInput = Input.GetAxisRaw("Horizontal"); //Detecta cuando pulsas las flechas Izquierda / Derecha
 
@@ -97,13 +98,13 @@ public class PlayerControllerCarril : MonoBehaviour
         animator.SetBool("IsGrounded", isGrounded);
         animator.SetBool("Jump", isJumping);
         animator.SetBool("Attack", isAttacking);
-        animator.SetBool("Charge", isCharge);
         animator.SetBool("JPress", jPress);
         animator.SetBool("JAirPress", jAirPress);
         animator.SetBool("KPress", kPress);
         animator.SetBool("IdleCrab", movement == Vector2.zero);
         animator.SetFloat("VelocidadCrabX", xSpeed);
         animator.SetFloat("VelocidadCrabY", ySpeed);
+        animator.SetBool("Defend", isDefending); 
         #endregion
 
         /*horizontalInput = Input.GetAxisRaw("Horizontal"); //Detecta cuando pulsas las flechas Izquierda / Derecha
@@ -166,7 +167,7 @@ public class PlayerControllerCarril : MonoBehaviour
 
     private void Twirl()
     {
-        if (Input.GetKey(KeyCode.J) && isGrounded == false && isAttacking == false && Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.J) && isGrounded == false && isAttacking == false)
         {
             
             jAirPress = true;
@@ -194,6 +195,15 @@ public class PlayerControllerCarril : MonoBehaviour
         }
     }
 
+    /*
+    private void Steps()
+    {
+        if(Input.GetKey(KeyCode.J) && Input.GetKey(KeyCode.DownArrow))
+        {
+            
+        }
+    }
+    */
     private void Jump()
     {
         if (Input.GetKey(KeyCode.Space) && currentJumps < posibleJumps && isAttacking == false && isGrounded)
@@ -209,6 +219,18 @@ public class PlayerControllerCarril : MonoBehaviour
             _rbPlayer.gravityScale = 0f;
             currentJumps = 0;
             isJumping = false;
+        }
+    }
+
+    private void Defend()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            isDefending = true;
+        }
+        else if (Input.GetKeyUp(KeyCode.L))
+        {
+            isDefending = false;
         }
     }
 
