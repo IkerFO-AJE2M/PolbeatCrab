@@ -275,6 +275,9 @@ MonoBehaviour:
   speedMultiplierY: 0
   animator: {fileID: 238455927}
   _rbShadow: {fileID: 138244216}
+  yPosition: 6.236
+  objectToFollow: {fileID: 238455921}
+  transShadow: {fileID: 138244212}
 --- !u!50 &138244216
 Rigidbody2D:
   serializedVersion: 4

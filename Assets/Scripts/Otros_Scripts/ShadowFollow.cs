@@ -14,15 +14,25 @@ public class ShadowFollow : MonoBehaviour
     public float speedMultiplierY;
     [SerializeField] Animator animator;
     [SerializeField] Rigidbody2D _rbShadow;
+    private bool isGrounded;
+
+    public float yPosition;
+    public GameObject objectToFollow;
+    public Component transShadow;
 
     void Start()
     {
-        
+        transShadow = GetComponent<Transform>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        transShadow.transform.position = new Vector2(objectToFollow.transform.position.x, yPosition);
+
+        
+
+        /*
         if (animator.GetCurrentAnimatorStateInfo(0).IsTag(""))
         {
             horizontalInput = Input.GetAxisRaw("Horizontal"); //Detecta cuando pulsas las flechas Izquierda / Derecha
@@ -45,14 +55,21 @@ public class ShadowFollow : MonoBehaviour
             ySpeed = baseSpeedY;
         }
 
+        [SerializeField] void OnCollisionEnter2D(Collision2D Player)
+            {
+            isGrounded = true;
+            }
+        [SerializeField] void OnCollisionExit2D(Collision2D Player)
+            {
+            isGrounded = false;
+            }
 
-            
+        */
 
-       
-/*
-        verticalInput = Input.GetAxisRaw("Vertical"); //Detecta cuando pulsas las flechas Arriba / Abajo
+    /*
+            verticalInput = Input.GetAxisRaw("Vertical"); //Detecta cuando pulsas las flechas Arriba / Abajo
 
-        transform.Translate(Vector2.up * Time.deltaTime * xSpeed * verticalInput);
-*/
-    }
+            transform.Translate(Vector2.up * Time.deltaTime * xSpeed * verticalInput);
+    */
+}
 }
