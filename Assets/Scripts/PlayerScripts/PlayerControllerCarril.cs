@@ -143,9 +143,8 @@ public class PlayerControllerCarril : MonoBehaviour
         if (Input.GetKey(KeyCode.K) && isAttacking == false && isGrounded == true)
         {
             kPress = true;
-            Debug.Log("Nelooser");
         }
-        else if (isAttacking)
+        else 
         {
             kPress = false;
         }
@@ -173,7 +172,7 @@ public class PlayerControllerCarril : MonoBehaviour
             jAirPress = true;
 
         }
-        else if (isAttacking)
+        else 
         {
             jAirPress = false;
 
@@ -216,7 +215,6 @@ public class PlayerControllerCarril : MonoBehaviour
         }
         else if (_rbSpeed == 0)
         {
-            _rbPlayer.gravityScale = 0f;
             currentJumps = 0;
             isJumping = false;
         }

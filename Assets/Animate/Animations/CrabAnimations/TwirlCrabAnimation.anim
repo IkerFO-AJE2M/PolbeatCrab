@@ -32,18 +32,6 @@ AnimationClip:
       value: {fileID: 1047025728, guid: 34a8b5c6e2372274fbd930f0b3fa0dd2, type: 3}
     - time: 0.41666666
       value: {fileID: -1371289411, guid: 34a8b5c6e2372274fbd930f0b3fa0dd2, type: 3}
-    - time: 0.5
-      value: {fileID: -680675622, guid: 34a8b5c6e2372274fbd930f0b3fa0dd2, type: 3}
-    - time: 0.5833333
-      value: {fileID: -110176428, guid: 34a8b5c6e2372274fbd930f0b3fa0dd2, type: 3}
-    - time: 0.6666667
-      value: {fileID: -429892749, guid: 34a8b5c6e2372274fbd930f0b3fa0dd2, type: 3}
-    - time: 0.75
-      value: {fileID: 1193342730, guid: 34a8b5c6e2372274fbd930f0b3fa0dd2, type: 3}
-    - time: 0.8333333
-      value: {fileID: 1047025728, guid: 34a8b5c6e2372274fbd930f0b3fa0dd2, type: 3}
-    - time: 0.9166667
-      value: {fileID: -1371289411, guid: 34a8b5c6e2372274fbd930f0b3fa0dd2, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -72,23 +60,17 @@ AnimationClip:
     - {fileID: 1193342730, guid: 34a8b5c6e2372274fbd930f0b3fa0dd2, type: 3}
     - {fileID: 1047025728, guid: 34a8b5c6e2372274fbd930f0b3fa0dd2, type: 3}
     - {fileID: -1371289411, guid: 34a8b5c6e2372274fbd930f0b3fa0dd2, type: 3}
-    - {fileID: -680675622, guid: 34a8b5c6e2372274fbd930f0b3fa0dd2, type: 3}
-    - {fileID: -110176428, guid: 34a8b5c6e2372274fbd930f0b3fa0dd2, type: 3}
-    - {fileID: -429892749, guid: 34a8b5c6e2372274fbd930f0b3fa0dd2, type: 3}
-    - {fileID: 1193342730, guid: 34a8b5c6e2372274fbd930f0b3fa0dd2, type: 3}
-    - {fileID: 1047025728, guid: 34a8b5c6e2372274fbd930f0b3fa0dd2, type: 3}
-    - {fileID: -1371289411, guid: 34a8b5c6e2372274fbd930f0b3fa0dd2, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1
+    m_StopTime: 0.5
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
     m_HasAdditiveReferencePose: 0
-    m_LoopTime: 1
+    m_LoopTime: 0
     m_LoopBlend: 0
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0

@@ -31,7 +31,7 @@ public class ShadowFollow : MonoBehaviour
         }
         else
         {
-            _rbShadow.velocity = Vector2.zero;
+            _rbShadow.velocity = Vector2.zero; //Esto hace que tenga sexo (velocida cero) por las noches ;) Postdata: Oli soy alvaro delagado y me follo a tu madre mientras hago este código lol xd omgealuñl
         }
 
         if (Input.GetKey(KeyCode.LeftShift))
