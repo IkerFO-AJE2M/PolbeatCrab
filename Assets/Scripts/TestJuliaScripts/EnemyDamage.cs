@@ -8,11 +8,12 @@ public class EnemyDamage : MonoBehaviour
     public AttributesManager playerAtm;
     public AttributesManager enemyAtm;
 
-    private void OnCollisionEnter2D(Collision2D EnemyDamage)
+    void OnColliderEnter2D(BoxCollider2D EnemyDamage)
     {
-        if(EnemyDamage.gameObject.tag == ("Player"))
+        if(playerAtm.gameObject.tag == ("Player"))
         {
             enemyAtm.DealDamage(GameObject.FindGameObjectWithTag("Player"));
         }
+      
     }
 }
