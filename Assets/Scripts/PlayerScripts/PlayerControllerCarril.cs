@@ -205,7 +205,7 @@ public class PlayerControllerCarril : MonoBehaviour
     */
     private void Jump()
     {
-        if (Input.GetKey(KeyCode.Space) && currentJumps < posibleJumps && isAttacking == false && isGrounded && isDefending == false)
+        if (Input.GetKey(KeyCode.Space) && currentJumps < posibleJumps && isAttacking == false && isGrounded == true && isDefending == false)
         {
             _rbSpeed = 0;
             _rbPlayer.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
