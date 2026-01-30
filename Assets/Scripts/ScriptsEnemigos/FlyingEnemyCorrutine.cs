@@ -20,12 +20,12 @@ public class FlyingEnemyCorrutine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        PlayerDetect();
     }
 
     void PlayerDetect()
     {
-        if (detectionRadious.isTrigger == true) ;
+        if (detectionRadious.isTrigger == true);
         Debug.Log("chupame el guebo");
     }
 }
