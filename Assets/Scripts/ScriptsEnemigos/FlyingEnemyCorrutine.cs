@@ -28,46 +28,50 @@ public class FlyingEnemyCorrutine : MonoBehaviour
     private bool idle;
     private bool death;
     private bool walking;
-    public bool isIn;
     
-
-    // Start is called before the first frame update
     void Start()
     {
 
     }
+
     void Update()
     {
-        playerPositionX = target.transform.position.x;
-        playerPositionY = target.transform.position.y;
-        enemyPositionX = transform.position.x;
-        enemyPositionY = transform.position.y;
         PositionData();
-        StartCoroutine(AttackDive());
+        if (toPlayerDistance < 10f)
+        {
+            speedX = 3;
+            playerPositionY = target.transform.position.y;
+            enemyPositionY = transform.position.y;
+            if (toPlayerDistance > 5f)
+            {
+                MoveToTarget();
+            }
+            else
+            {
+                StartCoroutine(AttackDive());
+            }
+        }
+        else
+        {
+            speedX = 0;
+        }
+
     }
      
     IEnumerator AttackDive()
     {
-
-
-            while (Mathf.Abs(toPlayerDistance) > 5f)
-            {
-                Debug.Log("Movin'");
-                MoveToTarget();
-            
-                yield return null;
-            }
-
+        if (toPlayerDistance < 6f)
+        {
             yield return new WaitForSeconds(1f);
-
-            while (Mathf.Abs(toPlayerDistance) > 1.65f && Mathf.Abs(toPlayerDistance) < 5f)
+            PositionData();
+            while (toPlayerDistance > 1.65f)
             {
                 Debug.Log("Drivin'");
                 transform.position = Vector2.MoveTowards(transform.position, target.transform.position, diveSpeed * Time.deltaTime);
-                yield return null;  
+                yield return null;
             }
 
-            while (Mathf.Abs(toPlayerDistance) < 5f)
+            while (toPlayerDistance < 5.9f)
             {
                 Debug.Log("Retreavin");
                 transform.position = Vector2.MoveTowards(transform.position, target.transform.position, retreveSpeed * Time.deltaTime * -1f);
@@ -75,19 +79,25 @@ public class FlyingEnemyCorrutine : MonoBehaviour
             }
 
             yield return new WaitForSeconds(2f);
+        }
+        else
+        {
+            yield break;
+        }
+
 
     }
 
     void MoveToTarget()
     {
-        if(toPlayerDistance > 1)
+        if(playerPositionX < enemyPositionX)
         {
-            transform.Translate(new Vector2(target.transform.position.x, 0f) * speedX * Time.deltaTime);
+            transform.Translate(Vector2.left * speedX * Time.deltaTime);
         }
 
-        if (toPlayerDistance < 1)
+        if (playerPositionX > enemyPositionX)
         {
-            transform.Translate(new Vector2(target.transform.position.x, 0f) * speedX * Time.deltaTime * -1);
+            transform.Translate(Vector2.left * speedX * Time.deltaTime * -1);
         }
     }
 
@@ -98,7 +108,6 @@ public class FlyingEnemyCorrutine : MonoBehaviour
         enemyPositionX = transform.position.x;
         enemyPositionY = transform.position.y;
 
-        //toPlayerDistance = Vector2.Distance(new Vector2(playerPositionX, playerPositionY), new Vector2(enemyPositionX, enemyPositionY));
         toPlayerDistance = Vector2.Distance(target.transform.position, transform.position);
     }
 }

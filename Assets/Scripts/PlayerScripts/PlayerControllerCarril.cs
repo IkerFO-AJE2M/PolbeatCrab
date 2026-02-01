@@ -26,6 +26,7 @@ public class PlayerControllerCarril : MonoBehaviour
     private bool isGrounded;
     private bool kAirPress;
     private bool isDefending;
+    private bool _facingRight;
     //Variables de Componente
     public SpriteRenderer spriteRenderer;
     public Animator animator;
@@ -49,7 +50,6 @@ public class PlayerControllerCarril : MonoBehaviour
         movement = new Vector2(horizontalInput, 0f);
 
         //Corregimos la orientación del sprite
-        SpriteFlip();
 
         //Miramos si está atacando
         AnimationTagCheck();
@@ -84,10 +84,18 @@ public class PlayerControllerCarril : MonoBehaviour
 
             transform.Translate(Vector2.right * Time.deltaTime * xSpeed * horizontalInput);
 
-           /* verticalInput = Input.GetAxisRaw("Vertical"); //Detecta cuando pulsas las flechas Arriba / Abajo
+            if (horizontalInput < 0f && _facingRight == true)
+            {
+                SpriteFlip();
+            }
+            else if (horizontalInput > 0f && _facingRight == false)
+            {
+                SpriteFlip();
+            }
+            /* verticalInput = Input.GetAxisRaw("Vertical"); //Detecta cuando pulsas las flechas Arriba / Abajo
 
-            transform.Translate(Vector2.up * Time.deltaTime * xSpeed * verticalInput);
-           */
+             transform.Translate(Vector2.up * Time.deltaTime * xSpeed * verticalInput);
+            */
         }
 
         #endregion
@@ -106,19 +114,6 @@ public class PlayerControllerCarril : MonoBehaviour
         animator.SetFloat("VelocidadCrabY", ySpeed);
         animator.SetBool("Defend", isDefending); 
         #endregion
-
-        /*horizontalInput = Input.GetAxisRaw("Horizontal"); //Detecta cuando pulsas las flechas Izquierda / Derecha
-
-         transform.Translate(Vector2.right * Time.deltaTime * xSpeed * horizontalInput);
-
-         verticalInput = Input.GetAxisRaw("Vertical"); //Detecta cuando pulsas las flechas Arriba / Abajo
-
-         transform.Translate(Vector2.up * Time.deltaTime * xSpeed * verticalInput);
-         #endregion
-
-         animator.SetBool("IdleCrab", movement == Vector2.zero);
-         animator.SetFloat("VelocidadCrabX", xSpeed);
-        */
     }
 
     private void HorizontalImputCheck()
@@ -128,14 +123,10 @@ public class PlayerControllerCarril : MonoBehaviour
 
     private void SpriteFlip()
     {
-        if (horizontalInput > 0.01)
-        {
-            spriteRenderer.flipX = true;
-        }
-        else if (horizontalInput < -0.01)
-        {
-            spriteRenderer.flipX = false;
-        }
+        _facingRight = !_facingRight;
+        float localScaleX = transform.localScale.x;
+        localScaleX = localScaleX * -1f;
+        transform.localScale = new Vector3(localScaleX, transform.localScale.y, transform.localScale.z);
     }
 
     private void Contusion()
