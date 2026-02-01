@@ -245,13 +245,21 @@ public class PlayerControllerCarril : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D Ground)
+    private void OnCollisionEnter2D(Collision2D collider)
     {
-        isGrounded = true;
+        if (collider.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+            
     }
-    private void OnCollisionExit2D(Collision2D Ground)
+    private void OnCollisionExit2D(Collision2D collider)
     {
-        isGrounded = false;
+        if (collider.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
+
     }
 }
 

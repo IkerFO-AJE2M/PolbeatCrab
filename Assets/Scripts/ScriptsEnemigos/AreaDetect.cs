@@ -4,22 +4,24 @@ using UnityEngine;
 
 public class AreaDetect : MonoBehaviour
 {
-    [SerializeField] bool isIn;
-    // Start is called before the first frame update
+    [SerializeField] FlyingEnemyCorrutine scriptFlyingEnemy;
+
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.CompareTag("Player"))
-        isIn = true;
+        scriptFlyingEnemy.isIn = true;
+        Debug.Log("Ayuda");
     }
     private void OnTriggerStay2D(Collider2D collider)
     {
         if (collider.CompareTag("Player"))
-        isIn = true;
+        scriptFlyingEnemy.isIn = true;
+        Debug.Log("Ayuda");
     }
     private void OnTriggerExit2D(Collider2D collider)
     {
         if (collider.CompareTag("Player"))
-            isIn = false;
-
+        scriptFlyingEnemy.isIn = false;
+        Debug.Log("Ayuda");
     }
 }
