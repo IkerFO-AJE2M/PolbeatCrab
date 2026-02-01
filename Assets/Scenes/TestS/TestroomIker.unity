@@ -255,8 +255,8 @@ MonoBehaviour:
   enemyPositionX: 0
   enemyPositionY: 0
   toPlayerDistance: 0
-  diveSpeed: 0.1
-  retreveSpeed: 0.1
+  diveSpeed: 0.5
+  retreveSpeed: 0.8
   target: {fileID: 579802750}
   detectionRadious: {fileID: 0}
   flyerAnimation: {fileID: 240619863}
@@ -574,6 +574,49 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2234616771472885525, guid: 28f5f93dd8240784fb91958b9878dc44, type: 3}
   m_PrefabInstance: {fileID: 3081567306361878253}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &579802752 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5817979239652955800, guid: 28f5f93dd8240784fb91958b9878dc44, type: 3}
+  m_PrefabInstance: {fileID: 3081567306361878253}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &579802753 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 5254964764835967935, guid: 28f5f93dd8240784fb91958b9878dc44, type: 3}
+  m_PrefabInstance: {fileID: 3081567306361878253}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &579802755 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6357712685795306301, guid: 28f5f93dd8240784fb91958b9878dc44, type: 3}
+  m_PrefabInstance: {fileID: 3081567306361878253}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &579802756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579802750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da168ff6e2844448b84b2adf80a8bd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  horizontalInput: 0
+  baseSpeedX: 5
+  xSpeed: 0
+  ySpeed: 0
+  speedMultiplierX: 1.5
+  umbralTiempo: 0.4
+  jumpForce: 12
+  _rbSpeed: 0
+  posibleJumps: 1
+  currentJumps: 0
+  spriteRenderer: {fileID: 579802755}
+  animator: {fileID: 579802752}
+  _rbPlayer: {fileID: 579802753}
+  Ground:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &823094307
 GameObject:
   m_ObjectHideFlags: 0
@@ -983,10 +1026,18 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5817979239652955800, guid: 28f5f93dd8240784fb91958b9878dc44, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 053fa7807e4f04e42839ad77c5852d99, type: 2}
+    m_RemovedComponents:
+    - {fileID: 92017878980252249, guid: 28f5f93dd8240784fb91958b9878dc44, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2234616771472885525, guid: 28f5f93dd8240784fb91958b9878dc44, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 579802756}
   m_SourcePrefab: {fileID: 100100000, guid: 28f5f93dd8240784fb91958b9878dc44, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
