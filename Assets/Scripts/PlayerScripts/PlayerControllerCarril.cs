@@ -31,13 +31,16 @@ public class PlayerControllerCarril : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Animator animator;
     public Rigidbody2D _rbPlayer;
+    public GameObject hitbox;
     [SerializeField] LayerMask Ground;
+    
     //Variables Compuestas
     private Vector2 movement;
 
     void Start()
     {
         _rbPlayer = GetComponent<Rigidbody2D>();
+        hitbox.SetActive(false);
     }
     void Update()
     {
@@ -146,7 +149,6 @@ public class PlayerControllerCarril : MonoBehaviour
         if (Input.GetKey(KeyCode.J) && isGrounded == true && isAttacking == false)
         {
             jPress = true;
-
         }
         else if (isAttacking)
         {
@@ -229,10 +231,12 @@ public class PlayerControllerCarril : MonoBehaviour
         if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
             isAttacking = true;
+            hitbox.SetActive(true);
         }
         else
         {
             isAttacking = false;
+            hitbox.SetActive(false);
         }
     }
 

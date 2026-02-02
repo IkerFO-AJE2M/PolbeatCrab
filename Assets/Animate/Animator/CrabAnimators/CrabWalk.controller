@@ -199,7 +199,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 14d868c732c67d440858bb6f688ab6ae, type: 2}
-  m_Tag: 
+  m_Tag: AirAttack
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -1590,7 +1590,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: c3a694732adf80a4e81f759705260e61, type: 2}
-  m_Tag: 
+  m_Tag: Dead
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
