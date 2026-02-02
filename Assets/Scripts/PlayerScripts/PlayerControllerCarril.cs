@@ -32,6 +32,7 @@ public class PlayerControllerCarril : MonoBehaviour
     public Animator animator;
     public Rigidbody2D _rbPlayer;
     [SerializeField] LayerMask Ground;
+    public GameObject hitbox;
     //Variables Compuestas
     private Vector2 movement;
 
@@ -146,6 +147,7 @@ public class PlayerControllerCarril : MonoBehaviour
         if (Input.GetKey(KeyCode.J) && isGrounded == true && isAttacking == false)
         {
             jPress = true;
+            hitbox.SetActive(false);
 
         }
         else if (isAttacking)
