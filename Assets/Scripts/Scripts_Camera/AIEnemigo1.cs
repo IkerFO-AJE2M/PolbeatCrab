@@ -1,17 +1,76 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemigoAvanzado : MonoBehaviour
 {
-    [Header("ConfiguraciÛn de Movimiento")]
+    [Header("Movimiento")]
+    public float velocidad = 3.5f;
+    public float distanciaSeguimiento = 12f;
+    public float distanciaParada = 1.2f; //se detiene
+
+    private Transform jugador;
+    private Rigidbody2D rb;
+    private bool mirandoDerecha = false;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+            jugador = playerObj.transform;
+
+        // Bloquear Y y rotaci√≥n
+        rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+    }
+
+    void FixedUpdate()
+    {
+        if (jugador == null) return;
+
+        float distanciaHorizontal = Mathf.Abs(jugador.position.x - transform.position.x);
+
+        // Solo avanza si est√° lo suficientemente lejos
+        if (distanciaHorizontal < distanciaSeguimiento && distanciaHorizontal > distanciaParada)
+        {
+            MoverHaciaJugador();
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
+        }
+    }
+
+    void MoverHaciaJugador()
+    {
+        float direccionX = Mathf.Sign(jugador.position.x - transform.position.x);
+
+        rb.velocity = new Vector2(direccionX * velocidad, 0f);
+
+        // Girar sprite
+        if (direccionX > 0 && !mirandoDerecha)
+            Flip();
+        else if (direccionX < 0 && mirandoDerecha)
+            Flip();
+    }
+
+    void Flip()
+    {
+        mirandoDerecha = !mirandoDerecha;
+        transform.Rotate(0f, 180f, 0f);
+    }
+
+
+    /*
+    [Header("Configuraci√≥n de Movimiento")]
     public float velocidad = 3.5f;
     public float distanciaSeguimiento = 12f;
     public float distanciaAtaque = 0.5f;
 
     [Header("IA de Profundidad (Eje Y)")]
-    public float variacionY = 0.5f; // Cu·nto se desvÌa del jugador arriba/abajo
-    public float tiempoCambioDesvio = 1f; // Cada cu·nto tiempo cambia su objetivo vertical
+    public float variacionY = 0.5f; // Cu√°nto se desv√≠a del jugador arriba/abajo
+    public float tiempoCambioDesvio = 1f; // Cada cu√°nto tiempo cambia su objetivo vertical
 
     private Transform jugador;
     private Rigidbody2D rb;
@@ -26,7 +85,7 @@ public class EnemigoAvanzado : MonoBehaviour
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null) jugador = playerObj.transform;
 
-        // Iniciar con un desvÌo aleatorio
+        // Iniciar con un desv√≠o aleatorio
         ActualizarDesvio();
     }
 
@@ -34,7 +93,7 @@ public class EnemigoAvanzado : MonoBehaviour
     {
         if (jugador == null) return;
 
-        // Actualizar el desvÌo aleatorio periÛdicamente para que el movimiento sea fluido
+        // Actualizar el desv√≠o aleatorio peri√≥dicamente para que el movimiento sea fluido
         cronometroDesvio += Time.deltaTime;
         if (cronometroDesvio >= tiempoCambioDesvio)
         {
@@ -49,20 +108,20 @@ public class EnemigoAvanzado : MonoBehaviour
         float distanciaHorizontal = Mathf.Abs(jugador.position.x - transform.position.x);
         float distanciaVertical = Mathf.Abs(jugador.position.y - transform.position.y);
 
-        // Si est· en rango de seguimiento pero no lo suficientemente cerca para atacar
+        // Si est√° en rango de seguimiento pero no lo suficientemente cerca para atacar
         if (distanciaHorizontal < distanciaSeguimiento && distanciaHorizontal > distanciaAtaque)
         {
             MoverHaciaJugador();
         }
         else
         {
-            rb.velocity = Vector2.zero; // Se detiene si est· muy lejos o en rango de ataque
+            rb.velocity = Vector2.zero; // Se detiene si est√° muy lejos o en rango de ataque
         }
     }
 
     void MoverHaciaJugador()
     {
-        // El objetivo real es el jugador + un pequeÒo desvÌo aleatorio en Y
+        // El objetivo real es el jugador + un peque√±o desv√≠o aleatorio en Y
         Vector2 objetivo = new Vector2(jugador.position.x, jugador.position.y + desvioActualY);
         Vector2 direccion = (objetivo - (Vector2)transform.position).normalized;
 
@@ -84,4 +143,5 @@ public class EnemigoAvanzado : MonoBehaviour
         mirandoDerecha = !mirandoDerecha;
         transform.Rotate(0f, 180f, 0f);
     }
+    */
 }
