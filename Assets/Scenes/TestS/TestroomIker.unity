@@ -255,8 +255,8 @@ MonoBehaviour:
   enemyPositionX: 0
   enemyPositionY: 0
   toPlayerDistance: 0
-  diveSpeed: 0.5
-  retreveSpeed: 0.8
+  diveSpeed: 0.1
+  retreveSpeed: 0.1
   target: {fileID: 579802750}
   detectionRadious: {fileID: 0}
   flyerAnimation: {fileID: 240619863}
