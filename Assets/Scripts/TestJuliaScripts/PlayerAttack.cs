@@ -25,7 +25,7 @@ public class PlayerAttack : MonoBehaviour
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (_isAttacking == true) {
-			if (collision.CompareTag("Enemy") || collision.CompareTag("Big Bullet")) {
+			if (collision.CompareTag("Enemy")) {
 				collision.SendMessageUpwards("AddDamage");
 			}
 		}

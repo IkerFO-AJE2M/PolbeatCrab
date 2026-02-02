@@ -132,7 +132,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2985304}
   - component: {fileID: 2985305}
-  m_Layer: 6
+  - component: {fileID: 2985306}
+  m_Layer: 0
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +184,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -199,6 +200,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2985306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2985303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b947e7fb65c3b24e9de64aa22f4d492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &778817293
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -251,8 +264,20 @@ PrefabInstance:
       propertyPath: hitbox
       value: 
       objectReference: {fileID: 2985303}
+    - target: {fileID: 5565149460340560725, guid: 064dbc959bfee7845b946a76af67ae8b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6476576870866367590, guid: 064dbc959bfee7845b946a76af67ae8b, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6476576870866367590, guid: 064dbc959bfee7845b946a76af67ae8b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6476576870866367590, guid: 064dbc959bfee7845b946a76af67ae8b, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -530,8 +555,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 559e9851c2bce984a8ee5987563bd0e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  attack: 0
+  health: 5
+  attack: 1
 --- !u!4 &1562120384 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2725850759896915096, guid: 064dbc959bfee7845b946a76af67ae8b, type: 3}
@@ -553,7 +578,7 @@ GameObject:
   - component: {fileID: 2104180201}
   m_Layer: 0
   m_Name: Kevin-The Allmighty
-  m_TagString: Player
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
