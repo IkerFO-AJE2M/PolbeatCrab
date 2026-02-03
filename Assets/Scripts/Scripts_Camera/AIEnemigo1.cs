@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class EnemigoAvanzado : MonoBehaviour
@@ -7,29 +8,57 @@ public class EnemigoAvanzado : MonoBehaviour
     [Header("Movimiento")]
     public float velocidad = 3.5f;
     public float distanciaSeguimiento = 12f;
-    public float distanciaParada = 1.2f; //se detiene
+    public float distanciaParada = 1.2f;
+    public float attackDelay = 1f;
+    private float attackTimer;
 
-    private Transform jugador;
-    private Rigidbody2D rb;
-    private bool mirandoDerecha = false;
+    //var. Animations
+    private bool walking;
+    private bool idle;
+
+
+    [Header("Animaciones")]
+    [SerializeField] Transform jugador;
+    [SerializeField] Rigidbody2D rb;
+    [SerializeField] GameObject player;
+    public bool mirandoDerecha = false;
+    public Animator animator;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
 
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj != null)
-            jugador = playerObj.transform;
+        player = GameObject.FindGameObjectWithTag("Player");
 
         // Bloquear Y y rotación
         rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
     }
 
+    private void Update()
+    {
+        if (player != null)
+        {
+            jugador = player.transform;
+        }
+    }
+
     void FixedUpdate()
     {
+
         if (jugador == null) return;
 
         float distanciaHorizontal = Mathf.Abs(jugador.position.x - transform.position.x);
+
+        if (rb.velocity != new Vector2(0f, 0f))
+        {
+            walking = true;
+            idle = false;
+        }
+        else
+        {
+            walking = false;
+            idle = true;
+        }
 
         // Solo avanza si está lo suficientemente lejos
         if (distanciaHorizontal < distanciaSeguimiento && distanciaHorizontal > distanciaParada)
@@ -39,11 +68,22 @@ public class EnemigoAvanzado : MonoBehaviour
         else
         {
             rb.velocity = Vector2.zero;
+            attackTimer += Time.deltaTime;
+
+            if (attackDelay <= attackTimer)
+            {
+                animator.SetTrigger("Attack");
+                Debug.Log("Ataca?");
+                attackTimer = 0f;
+            }
         }
+
+        animator.SetBool("Walking", walking);
+        animator.SetBool("Idle", idle);
     }
 
     void MoverHaciaJugador()
-    {
+    { 
         float direccionX = Mathf.Sign(jugador.position.x - transform.position.x);
 
         rb.velocity = new Vector2(direccionX * velocidad, 0f);
