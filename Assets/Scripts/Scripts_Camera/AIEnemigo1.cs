@@ -12,10 +12,11 @@ public class EnemigoAvanzado : MonoBehaviour
     public float attackDelay = 1f;
     private float attackTimer;
 
+
     //var. Animations
     private bool walking;
     private bool idle;
-
+    public PlayerControllerCarril playerController;
 
     [Header("Animaciones")]
     [SerializeField] Transform jugador;
@@ -93,6 +94,11 @@ public class EnemigoAvanzado : MonoBehaviour
             Flip();
         else if (direccionX < 0 && mirandoDerecha)
             Flip();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
     }
 
     void Flip()
