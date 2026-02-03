@@ -39,8 +39,9 @@ public class PlayerControllerCarril : MonoBehaviour
     public Animator animator;
     public Rigidbody2D _rbPlayer;
     [SerializeField] LayerMask Ground;
-    public GameObject hitbox;
+  //  public GameObject hitbox;
     public Slider healthBar;
+    public PlayerControllerCarril playerController;
 
     //Variables Compuestas
     private Vector2 movement;
@@ -53,6 +54,8 @@ public class PlayerControllerCarril : MonoBehaviour
 
         healthBar.value = healthCrab;
         healthBar.maxValue = maxHealthCrab;
+
+        playerController = GetComponent<PlayerControllerCarril>();
     }
     void Update()
     {
@@ -161,7 +164,6 @@ public class PlayerControllerCarril : MonoBehaviour
         if (Input.GetKey(KeyCode.J) && isGrounded == true && isAttacking == false)
         {
             jPress = true;
-            hitbox.SetActive(false);
 
         }
         else if (isAttacking)
@@ -252,13 +254,15 @@ public class PlayerControllerCarril : MonoBehaviour
         }
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int damageToTake)
     {
-        healthCrab -= damageEnemy;
+        healthCrab -= damageToTake;
 
         if(healthCrab <= 0)
         {
             animator.SetTrigger("Dead");
+            healthBar.value = 0;
+            playerController.enabled = false;
         }
     }
 
