@@ -7,6 +7,7 @@ public class SceneFader : MonoBehaviour
 {
     public Image fadeImage;
     public float fadeDuration = 0.8f;
+    public string scene;
 
     void Awake()
     {
@@ -51,7 +52,7 @@ public class SceneFader : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            FadeToScene("Nivel_1.1");
+            FadeToScene(scene);
         }
         
     }

@@ -11,7 +11,7 @@ public class CambioEscenAnimatica : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("IniciarCarga", 22f); // Ejecuta la función IniciarCarga pasados 10 segundos
+        Invoke("IniciarCarga", 20f); // Ejecuta la función IniciarCarga pasados 10 segundos
     }
 
 
