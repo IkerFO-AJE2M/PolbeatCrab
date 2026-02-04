@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerControllerCarril : MonoBehaviour
 {
@@ -17,6 +17,11 @@ public class PlayerControllerCarril : MonoBehaviour
     public float _rbSpeed;
     public float posibleJumps;
     public float currentJumps;
+    public float healthCrab;
+    public float maxHealthCrab;
+    public float damageCrab;
+    public int damageToTake = 1;
+
     // Varialbes Bool
     private bool jPress;
     private bool jAirPress;
@@ -27,21 +32,33 @@ public class PlayerControllerCarril : MonoBehaviour
     private bool kAirPress;
     private bool isDefending;
     private bool _facingRight;
+
     //Variables de Componente
     public SpriteRenderer spriteRenderer;
     public Animator animator;
     public Rigidbody2D _rbPlayer;
     [SerializeField] LayerMask Ground;
+  //  public GameObject hitbox;
+    public Slider healthBar;
+    public PlayerControllerCarril playerController;
+
     //Variables Compuestas
     private Vector2 movement;
+
 
     void Start()
     {
         _rbPlayer = GetComponent<Rigidbody2D>();
+        healthCrab = maxHealthCrab;
+
+       healthBar.value = healthCrab;
+       healthBar.maxValue = maxHealthCrab;
+
+        playerController = GetComponent<PlayerControllerCarril>();
     }
     void Update()
     {
-        
+        healthBar.value = healthCrab;
 
         //Actualizamos la velocidad del Rigidbody cada frame
         _rbSpeed = _rbPlayer.velocity.magnitude;
@@ -112,8 +129,15 @@ public class PlayerControllerCarril : MonoBehaviour
         animator.SetBool("IdleCrab", movement == Vector2.zero);
         animator.SetFloat("VelocidadCrabX", xSpeed);
         animator.SetFloat("VelocidadCrabY", ySpeed);
-        animator.SetBool("Defend", isDefending); 
+        animator.SetBool("Defend", isDefending);
         #endregion
+
+        if (healthCrab <= 0)
+        {
+            animator.SetTrigger("Dead");
+            healthBar.value = 0;
+            playerController.enabled = false;
+        }
     }
 
     private void HorizontalImputCheck()
@@ -236,6 +260,11 @@ public class PlayerControllerCarril : MonoBehaviour
         }
     }
 
+    public void TakeDamage()
+    {
+        healthCrab -= damageToTake;
+    }
+
     private void OnCollisionEnter2D(Collision2D collider)
     {
         if (collider.gameObject.CompareTag("Ground"))
@@ -251,6 +280,13 @@ public class PlayerControllerCarril : MonoBehaviour
             isGrounded = false;
         }
 
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("HitboxEnemy"))
+        {
+            TakeDamage();
+        }
     }
 }
 

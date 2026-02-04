@@ -7,6 +7,7 @@ public class SceneFader : MonoBehaviour
 {
     public Image fadeImage;
     public float fadeDuration = 0.8f;
+    public string scene;
 
     void Awake()
     {
@@ -45,6 +46,15 @@ public class SceneFader : MonoBehaviour
             fadeImage.color = new Color(0, 0, 0, alpha);
             yield return null;
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            FadeToScene(scene);
+        }
+        
     }
 }
 

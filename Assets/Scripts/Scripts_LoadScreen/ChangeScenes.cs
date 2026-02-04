@@ -20,6 +20,5 @@ public class ChangeScene : MonoBehaviour
     public void End()
     {
         Debug.Log("Se termino");
-        Application.Quit(); //Sale del programa
     }
 }
