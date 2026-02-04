@@ -164,7 +164,7 @@ VideoPlayer:
   m_TargetAudioSources:
   - {fileID: 0}
   m_DirectAudioVolumes:
-  - 1
+  - 0
   m_Url: 
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
@@ -219,8 +219,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18fe85f7329404344822006df64db306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneMusic: {fileID: 0}
-  loop: 1
+  sceneMusic: {fileID: 8300000, guid: 61dfc734a556c654e8a43437cb7faf13, type: 3}
+  loop: 0
 --- !u!4 &1736833353
 Transform:
   m_ObjectHideFlags: 0

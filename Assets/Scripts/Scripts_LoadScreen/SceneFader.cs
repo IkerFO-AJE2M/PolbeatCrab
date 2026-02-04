@@ -46,6 +46,15 @@ public class SceneFader : MonoBehaviour
             yield return null;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            FadeToScene("Nivel_1.1");
+        }
+        
+    }
 }
 
 

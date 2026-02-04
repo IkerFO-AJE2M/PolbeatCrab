@@ -118,7 +118,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.18315125, y: -0.14466906}
@@ -174,10 +174,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocidad: 3.5
-  distanciaSeguimiento: 12
+  distanciaSeguimiento: 10
   distanciaParada: 2.3
   attackDelay: 1
   enemyHealth: 3
+  damageTaken: 3
   playerController: {fileID: 0}
   jugador: {fileID: 0}
   rb: {fileID: 8755912591486730502}
@@ -186,6 +187,7 @@ MonoBehaviour:
   cucaracho: {fileID: 6169123883550945345}
   mirandoDerecha: 1
   animator: {fileID: 8470849996456233334}
+  HitboxEnemy: {fileID: 0}
 --- !u!95 &8470849996456233334
 Animator:
   serializedVersion: 5
@@ -218,9 +220,9 @@ GameObject:
   - component: {fileID: 2794219060977733113}
   - component: {fileID: 5207915448158469019}
   - component: {fileID: 9071345805295777138}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hitbox
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -247,7 +249,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4958113300891143591}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -297,6 +299,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4ad76c9b9b181d47892a77d599b2f21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
   enemyController: {fileID: 6169123883550945345}
-  damageEnemy: 1

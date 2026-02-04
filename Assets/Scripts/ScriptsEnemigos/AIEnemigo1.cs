@@ -11,7 +11,8 @@ public class EnemigoAvanzado : MonoBehaviour
     public float distanciaParada = 1.2f;
     public float attackDelay = 1f;
     private float attackTimer;
-    public int enemyHealth; 
+    public int enemyHealth;
+    public int damageTaken = 3;
 
 
     //var. Animations
@@ -26,6 +27,7 @@ public class EnemigoAvanzado : MonoBehaviour
     public EnemigoAvanzado cucaracho;
     public bool mirandoDerecha = false;
     public Animator animator;
+    public GameObject HitboxEnemy;
 
     void Start()
     {
@@ -43,6 +45,22 @@ public class EnemigoAvanzado : MonoBehaviour
         {
             jugador = player.transform;
         }
+        StartCoroutine(Dead());
+
+       /* 
+        if (enemyHealth <= 0)
+        {
+            cucaracho.enabled = false;
+            if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Dead"))
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                animator.SetTrigger("Dead");
+            }
+        }
+       */
     }
 
     void FixedUpdate()
@@ -103,21 +121,30 @@ public class EnemigoAvanzado : MonoBehaviour
         transform.Rotate(0f, 180f, 0f);
     }
 
-    public void ReciveDamage(int damageToDo)
+    IEnumerator Dead()
     {
-        enemyHealth -= damageToDo;
-
         if (enemyHealth <= 0)
         {
-            cucaracho.enabled = false;
+            animator.SetTrigger("Dead");
+
             if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Dead"))
             {
                 Destroy(this.gameObject);
             }
-            else
-            {
-                animator.SetTrigger("Dead");
-            }
+            
+        }
+        yield return null;
+    }
+
+    public void ReciveDamage()
+    {
+        enemyHealth -= damageTaken;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            ReciveDamage();
         }
     }
 }

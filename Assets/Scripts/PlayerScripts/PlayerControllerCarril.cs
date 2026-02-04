@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,7 +20,7 @@ public class PlayerControllerCarril : MonoBehaviour
     public float healthCrab;
     public float maxHealthCrab;
     public float damageCrab;
-    public float damageEnemy;
+    public int damageToTake = 1;
 
     // Varialbes Bool
     private bool jPress;
@@ -52,8 +51,8 @@ public class PlayerControllerCarril : MonoBehaviour
         _rbPlayer = GetComponent<Rigidbody2D>();
         healthCrab = maxHealthCrab;
 
-        healthBar.value = healthCrab;
-        healthBar.maxValue = maxHealthCrab;
+       healthBar.value = healthCrab;
+       healthBar.maxValue = maxHealthCrab;
 
         playerController = GetComponent<PlayerControllerCarril>();
     }
@@ -130,8 +129,15 @@ public class PlayerControllerCarril : MonoBehaviour
         animator.SetBool("IdleCrab", movement == Vector2.zero);
         animator.SetFloat("VelocidadCrabX", xSpeed);
         animator.SetFloat("VelocidadCrabY", ySpeed);
-        animator.SetBool("Defend", isDefending); 
+        animator.SetBool("Defend", isDefending);
         #endregion
+
+        if (healthCrab <= 0)
+        {
+            animator.SetTrigger("Dead");
+            healthBar.value = 0;
+            playerController.enabled = false;
+        }
     }
 
     private void HorizontalImputCheck()
@@ -254,16 +260,9 @@ public class PlayerControllerCarril : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damageToTake)
+    public void TakeDamage()
     {
         healthCrab -= damageToTake;
-
-        if(healthCrab <= 0)
-        {
-            animator.SetTrigger("Dead");
-            healthBar.value = 0;
-            playerController.enabled = false;
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D collider)
@@ -281,6 +280,13 @@ public class PlayerControllerCarril : MonoBehaviour
             isGrounded = false;
         }
 
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            TakeDamage();
+        }
     }
 }
 

@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class HitboxHit : MonoBehaviour
 {
-    public PlayerControllerCarril playerController;
+   //public PlayerControllerCarril playerController;
     public EnemigoAvanzado enemyController;
-    public int damageEnemy;
+   //public int damageEnemy;
 
     void Start()
     {
@@ -18,14 +18,5 @@ public class HitboxHit : MonoBehaviour
     void Update()
     {
 
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.CompareTag("Player"))
-        {
-            Debug.Log("me cago");
-            playerController.TakeDamage(damageEnemy);
-        }
     }
 }

@@ -95,7 +95,7 @@ public class FlyingEnemyCorrutine : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
             PositionData();
-            while (toPlayerDistance > 2.5f)
+            while (toPlayerDistance > 2f)
             {
                 attacking = true;
                 Debug.Log("Drivin'");
@@ -107,8 +107,9 @@ public class FlyingEnemyCorrutine : MonoBehaviour
             }
 
             attacking = false;
+            Debug.Log("hola");
 
-            while (toPlayerDistance < 7f && attacking == false)
+            while (toPlayerDistance < 6f && attacking == false)
             {
                 Debug.Log("Retreavin");
                 transform.position = Vector2.MoveTowards(transform.position, target.transform.position, retreveSpeed * Time.deltaTime * -1f);
