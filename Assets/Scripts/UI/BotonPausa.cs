@@ -5,6 +5,21 @@ using UnityEngine;
 public class BotonPausa : MonoBehaviour
 {
     public GameObject pauseCanvas;
+    public GameObject hudCanvas;
+
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Pause();
+        }
+    }
+
+    public void Pause()
+    {
+        pauseCanvas.SetActive(!pauseCanvas.activeSelf);
+        hudCanvas.SetActive(!pauseCanvas.activeSelf);
+    }
 
     public void PauseGame()
     {

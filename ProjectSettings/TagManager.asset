@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Ground
   - PlayerCape
+  - HitboxPlayer
+  - HitboxEnemy
   layers:
   - Default
   - TransparentFX

@@ -25,6 +25,7 @@ public class EnemigoAvanzado : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] GameObject enemy;
     public EnemigoAvanzado cucaracho;
+    public Collider2D enemyCollider;
     public bool mirandoDerecha = false;
     public Animator animator;
     public GameObject HitboxEnemy;
@@ -32,7 +33,6 @@ public class EnemigoAvanzado : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
 
         player = GameObject.FindGameObjectWithTag("Player");
 
@@ -125,13 +125,10 @@ public class EnemigoAvanzado : MonoBehaviour
     {
         if (enemyHealth <= 0)
         {
+            enemyCollider.enabled = false;
             animator.SetTrigger("Dead");
-
-            if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Dead"))
-            {
-                Destroy(this.gameObject);
-            }
-            
+            yield return new WaitForSeconds(1f);
+            Destroy(this.gameObject);
         }
         yield return null;
     }

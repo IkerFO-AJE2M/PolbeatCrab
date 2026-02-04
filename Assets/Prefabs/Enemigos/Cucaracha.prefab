@@ -177,7 +177,7 @@ MonoBehaviour:
   distanciaSeguimiento: 10
   distanciaParada: 2.3
   attackDelay: 1
-  enemyHealth: 3
+  enemyHealth: 6
   damageTaken: 3
   playerController: {fileID: 0}
   jugador: {fileID: 0}
@@ -185,9 +185,10 @@ MonoBehaviour:
   player: {fileID: 0}
   enemy: {fileID: 4306854488831432239}
   cucaracho: {fileID: 6169123883550945345}
+  enemyCollider: {fileID: 596113685922812853}
   mirandoDerecha: 1
   animator: {fileID: 8470849996456233334}
-  HitboxEnemy: {fileID: 0}
+  HitboxEnemy: {fileID: 4958113300891143591}
 --- !u!95 &8470849996456233334
 Animator:
   serializedVersion: 5
@@ -222,7 +223,7 @@ GameObject:
   - component: {fileID: 9071345805295777138}
   m_Layer: 7
   m_Name: Hitbox
-  m_TagString: Enemy
+  m_TagString: HitboxEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
