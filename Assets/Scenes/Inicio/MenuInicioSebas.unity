@@ -789,7 +789,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 824569444}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: End
+        m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1242,6 +1242,7 @@ GameObject:
   m_Component:
   - component: {fileID: 824569443}
   - component: {fileID: 824569444}
+  - component: {fileID: 824569445}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1274,6 +1275,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa63dc741f8382843a8f8a446ee3fd05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &824569445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824569442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 825c879174228dc46bd42aa37d0cd440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1065924487
